@@ -4,7 +4,9 @@
   "description": "Repositório do projeto v2 do curso de testes automatizados com Cypress (intermdiário) da Escola TAT no Udemy",
   "main": "cypress.config.js",
   "scripts": {
-    "test": "cypress run"
+    "cy:open": "cypress open",
+    "test": "cypress run",
+    "docker": "docker run --publish 8000:80 --publish 22:22 --hostname localhost wlsf82/gitlab-ce"
   },
   "repository": {
     "type": "git",
@@ -15,10 +17,11 @@
     "Talking About Testing",
     "E2E Testing"
   ],
-  "author": "Walmyr Filho <wlsf82@gmail.com> (https://walmyr.dev/)",
+  "author": "Schneider",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/wlsf82/cypress-intermediario-v2/issues"
-  },
-  "homepage": "https://github.com/wlsf82/cypress-intermediario-v2#readme"
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "cypress": "^12.5.1",
+    "cypress-plugin-api": "^2.10.3"
+  }
 }
