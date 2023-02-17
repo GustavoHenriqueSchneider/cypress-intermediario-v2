@@ -67,3 +67,9 @@ Cypress.Commands.add('gui_setLabelOnIssue', label => {
     cy.contains('.label-item', label.name).click()
     cy.get('a[data-track-property=labels]').click()
 })
+
+Cypress.Commands.add('gui_setMilestoneOnIssue', milestone => {
+
+    cy.get('div.milestone a').click()
+    cy.contains('div.milestone .dropdown-content a', milestone).click()
+})

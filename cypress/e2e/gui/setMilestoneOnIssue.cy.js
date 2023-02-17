@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 
-describe('Cria e insere label numa issue', () => {
+describe('Cria e insere um milestone numa issue', () => {
 
     beforeEach(() => {
 
@@ -17,19 +17,16 @@ describe('Cria e insere label numa issue', () => {
             description: faker.random.words(10)
         }
 
-        const label = {
-            name: `label-${faker.random.word()}`,
-            color: '#ffaabb'
-        }
+        const milestone = faker.random.word()
 
         cy.wrap(project).as('project')
         cy.wrap(issue).as('issue')
-        cy.wrap(label).as('label')
+        cy.wrap(milestone).as('milestone')
 
         cy.api_createIssue(project, issue)
             .then(response => {
 
-                cy.api_createLabel(response.body.project_id, label)
+                cy.api_createMilestone(response.body.project_id, milestone)
 
                 cy.visit(`${Cypress.env('user_name')}/${project.name}/issues/${response.body.iid}`)
             })
@@ -37,16 +34,11 @@ describe('Cria e insere label numa issue', () => {
 
     it('Sucesso', () => {
 
-        cy.get('@label')
-            .then(label => {
+        cy.get('@milestone')
+            .then(milestone => {
 
-                cy.gui_setLabelOnIssue(label)
-
-                cy.get('.qa-labels-block')
-                    .should('contain', label.name)
-
-                cy.get('.qa-labels-block span')
-                    .should('include.attr', 'style', `background-color: ${label.color}; color: #333333;`)
+                cy.gui_setMilestoneOnIssue(milestone)
+                cy.get('div.milestone .value').should('have.text', milestone)
             })
     })
 })
